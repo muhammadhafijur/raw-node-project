@@ -1,4 +1,10 @@
-// Uptime Monitoring Application
+/*
+ * Title: Uptime Monitoring Application
+ * Description: A RESTFul API to monitor up or down time of user defined links
+ * Author: Hafijur Rahman
+ * Date : 25/01/2022
+ *
+ */
 
 // dependencies
 const http = require("http");
@@ -7,15 +13,23 @@ const http = require("http");
 const app = {};
 
 // configuration
-app.config = {};
+app.config = {
+  port: 3000,
+};
 
 // create server
 app.createServer = () => {
-  const server = http.createServer();
+  const server = http.createServer(app.handleReqRes);
+  server.listen(app.config.port, () => {
+    console.log(`listening to port ${app.config.port}`);
+  });
 };
 
 // handle Request Response
-app.handleReqRes = () => {
+app.handleReqRes = (req, res) => {
   // response handle
-  res.send("Hello world");
+  res.end("Hello world");
 };
+
+// start the server
+app.createServer();
